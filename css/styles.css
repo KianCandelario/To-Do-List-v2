@@ -134,7 +134,7 @@ span {
     margin-right: 1em;
 }
 
-.task {
+#task {
     font-family: 'Quicksand', sans-serif;
     font-size: .8em;
 }
@@ -171,4 +171,18 @@ span {
     background-color: #A4C3B2;
     padding: .4em .7em .4em .7em;
     border-radius: 1em;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: .8;
+}
+
+.uncomepleted {
+    text-decoration: none;
+    opacity: 1;
+}
+
+.complete-check {
+    filter: invert(57%) sepia(8%) saturate(1037%) hue-rotate(102deg) brightness(92%) contrast(86%);
 }
