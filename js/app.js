@@ -15,16 +15,16 @@ function addTask() {
 
     else {
         taskDiv.innerHTML = `<div class="check-task">
-                            <span id="done">
-                                <img src="../assets/icons/check-circle-svgrepo-com.svg" />
+                            <span id="done" onclick="doneTask()">
+                                <img id='done-bttn' src="../assets/icons/check-circle-svgrepo-com.svg" />
                             </span>
-                            <div class="task">
-                                <p>${input.value}</p>
+                            <div class="task-wrap">
+                                <p id="task">${input.value}</p>
                             </div>
                         </div>
                         <div class="edit-del">
                             <div class="edit-div">
-                                <span id="edit">Edit</span>
+                                <span id="edit" onclick="editTask()">Edit</span>
                             </div>
                             <div class="del-div">
                                 <span id="delete" onclick="deleteTask()">&#215;</span>
@@ -39,6 +39,7 @@ function addTask() {
 
 function deleteTask() {
     const deleteBttn = document.querySelectorAll("#delete");
+
     deleteBttn.forEach(span => {
         span.addEventListener('click', () => {
             const task = span.closest('.tasks-container');
@@ -47,6 +48,44 @@ function deleteTask() {
     });
 }
 
-function editBttn() {
-    
+function editTask() {
+    const editBttn = document.querySelectorAll("#edit");
+
+    editBttn.forEach(span => {
+        span.addEventListener('click', () => {
+            const taskParent = span.closest('.check-task');
+            const taskEdit = taskParent.querySelector('#task');
+            taskEdit.setAttribute('contenteditable', true);
+        });
+    });
+}
+
+function saveTask() {
+
+}
+
+function doneTask() {
+    const doneBttn = document.querySelectorAll("#done");
+
+    doneBttn.forEach(span => {
+        span.addEventListener('click', () => {
+            const done = span.nextElementSibling;
+            const task = done.querySelector('#task');
+            const check = span.querySelector('#done-bttn');
+
+            task.classList.toggle('comepleted');
+
+            if (task.classList.contains('completed')) {
+                task.classList.remove('completed');
+                task.classList.add('uncompleted');
+                check.classList.remove('complete-check');
+            }
+
+            else {
+                task.classList.remove('uncompleted');
+                task.classList.add('completed');
+                check.classList.add('complete-check');
+            }
+        });
+    });
 }
