@@ -2,7 +2,7 @@
 const taskList = document.querySelector('.task-list');
 const input = document.querySelector('input');
 
-// Functionalities
+// Functions
 function addTask() {
     const taskDiv = document.createElement('div');
 
@@ -19,15 +19,14 @@ function addTask() {
                                 <img id='done-bttn' src="../assets/icons/check-circle-svgrepo-com.svg" />
                             </span>
                             <div class="task-wrap">
-                                <p id="task">${input.value}</p>
+                                <p id="task" class="uncompleted">${input.value}</p>
                             </div>
                         </div>
-                        <div class="edit-del">
-                            <div class="edit-div">
-                                <span id="edit" onclick="editTask()">Edit</span>
-                            </div>
-                            <div class="del-div">
-                                <span id="delete" onclick="deleteTask()">&#215;</span>
+                        <div class="del-container">
+                            <div class="del-wrapper">
+                                <span id="delete" onclick="deleteTask()">
+                                    <img src="../assets/icons/trash-svgrepo-com.svg" />
+                                </span>
                             </div>
                         </div>`;
 
@@ -48,22 +47,6 @@ function deleteTask() {
     });
 }
 
-function editTask() {
-    const editBttn = document.querySelectorAll("#edit");
-
-    editBttn.forEach(span => {
-        span.addEventListener('click', () => {
-            const taskParent = span.closest('.check-task');
-            const taskEdit = taskParent.querySelector('#task');
-            taskEdit.setAttribute('contenteditable', true);
-        });
-    });
-}
-
-function saveTask() {
-
-}
-
 function doneTask() {
     const doneBttn = document.querySelectorAll("#done");
 
@@ -72,8 +55,6 @@ function doneTask() {
             const done = span.nextElementSibling;
             const task = done.querySelector('#task');
             const check = span.querySelector('#done-bttn');
-
-            task.classList.toggle('comepleted');
 
             if (task.classList.contains('completed')) {
                 task.classList.remove('completed');
@@ -88,4 +69,8 @@ function doneTask() {
             }
         });
     });
+}
+
+function filerTask() {
+
 }
