@@ -82,7 +82,9 @@ function filterTasks(filterOption) {
     tasks.forEach(task => {
 
         /*
-            If the class "completed" is present in the class list of the selected <p> element, the expression evaluates to 'completed', indicating that the task is completed. Otherwise, it evaluates to 'uncompleted', indicating that the task is not completed.
+            If the class "completed" is present in the class list of the selected <p> element, 
+            the expression evaluates to 'completed', indicating that the task is completed. 
+            Otherwise, it evaluates to 'uncompleted', indicating that the task is not completed.
         */
         const taskStatus = task.querySelector('#task').classList.contains('completed') ? 'completed' : 'uncompleted';
   
