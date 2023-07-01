@@ -1,13 +1,15 @@
 // Setting variables
 const taskList = document.querySelector('.task-list');
 const input = document.querySelector('input');
+const filterOptions = document.querySelectorAll('.filter-option');
 
-// Functions
+// Function for adding tasks
 function addTask() {
     const taskDiv = document.createElement('div');
 
     if (input.value == '') {
         input.placeholder = "You can't add empty task!";
+        alert("Sorry. Empty task is not allowed!");
         setTimeout(() => {
             input.placeholder = "Start adding tasks...";
         }, 2000);
@@ -36,6 +38,7 @@ function addTask() {
     }
 }
 
+// Function for deleting tasks
 function deleteTask() {
     const deleteBttn = document.querySelectorAll("#delete");
 
@@ -47,6 +50,7 @@ function deleteTask() {
     });
 }
 
+// Function for marking tasks as done
 function doneTask() {
     const doneBttn = document.querySelectorAll("#done");
 
@@ -71,6 +75,41 @@ function doneTask() {
     });
 }
 
-function filerTask() {
+// Function to filter tasks based on the selected option
+function filterTasks(filterOption) {
+    const tasks = document.querySelectorAll('.tasks-container');
+  
+    tasks.forEach(task => {
 
+        /*
+            If the class "completed" is present in the class list of the selected <p> element, the expression evaluates to 'completed', indicating that the task is completed. Otherwise, it evaluates to 'uncompleted', indicating that the task is not completed.
+        */
+        const taskStatus = task.querySelector('#task').classList.contains('completed') ? 'completed' : 'uncompleted';
+  
+        if (filterOption === 'all' || taskStatus === filterOption) {
+            task.classList.remove('hide'); // Show the task
+        } 
+        else {
+            task.classList.add('hide'); // Hide the task
+        }
+    });
 }
+  
+// Attaching a click event listener to each filter option span
+filterOptions.forEach(span => {
+    span.addEventListener('click', () => {
+        // Remove the "selected" class from all spans
+        filterOptions.forEach(option => {
+            option.classList.remove('selected');
+        });
+  
+        // Add the "selected" class to the clicked span
+        span.classList.add('selected');
+  
+        // Get the filter option from the clicked span
+        const filterOption = span.textContent.toLowerCase();
+  
+        // Call the filter function with the selected filter option
+        filterTasks(filterOption);
+    });
+});
